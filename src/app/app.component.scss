@@ -1,0 +1,18 @@
+$primary-color : #E87722;
+
+.cmc-header-logo {
+    padding-left: 10px;
+    padding-right: 10px;
+    } 
+.cmc-spacer {
+     flex: 1 1 auto;
+    }
+.cmc-toolbar {
+    background: $primary-color;
+    height: 50px;
+    }
+
+mat-ink-bar{
+    background-color: $primary-color;
+}
+

@@ -1,0 +1,18 @@
+<mat-toolbar color="primary" class="mat-elevation-z8 cmc-toolbar">
+  <span><img class="cmc-header-logo" src="../assets/headerOptum.png" alt="Optum Logo" /></span><span>Facets Password Reset portal</span>
+  <span class="cmc-spacer"></span>
+</mat-toolbar>
+<div *ngIf="this.authenticationService.isLoggedIn(); else showLoginpage">  
+  <app-header></app-header>
+  <app-home-page></app-home-page>
+</div>
+<ng-template #showLoginpage>
+  <app-login-form></app-login-form>
+  <footer class="page-footer font-small teal pt-4" >  
+    <div class="footer-copyright text-center py-3">© 2021 Optum. All rights reserved</div>
+  </footer>  
+</ng-template>
+
+ <!-- <app-header></app-header>
+  <app-home-page></app-home-page> -->
+  

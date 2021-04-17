@@ -1,0 +1,15 @@
+<div *ngIf="this.authenticationService.isLoggedIn()">
+    <div class="topcorner">
+      <button mat-icon-button [matMenuTriggerFor]="menu" class="cmc-username-login">{{currentUser.username}}<mat-icon>
+          person</mat-icon>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+  

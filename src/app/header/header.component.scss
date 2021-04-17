@@ -1,0 +1,23 @@
+@import '../breakpoints';
+.topcorner {
+    position: absolute;
+    top: 3px;
+    right: 10px;
+  }
+
+.cmc-username-login {
+    font-size: 16px;
+    width: auto;
+    height: auto;
+    color: white;
+  }
+
+@include breakpoint-max(600px) {
+  .fixed-topnav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100% !important;
+  }
+}

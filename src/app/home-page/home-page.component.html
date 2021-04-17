@@ -1,0 +1,293 @@
+<div class="row mt-5">
+    <div class="col-md-3 offset-1">    
+      <h5>Please select the Account</h5>
+  
+      <!-- <div class="form-group col-xs-3">     
+        <select class="form-control" (selectionChange)="onFormSelection1()">
+                  <option value="" disabled>--Select Type--</option>
+                  <option *ngFor="let account of accounts" [value]="account.value">
+                    {{account.viewValue}}
+                  </option>
+        </select>
+      </div> -->
+  
+      <!-- <mat-form-field appearance="fill">
+        <mat-label >Select</mat-label>      
+        <mat-select (selectionChange)="onFormSelection($event)" [(ngModel)]="accountDropDown">
+          <mat-option *ngFor="let account of accounts" [value]="account">
+            {{account}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> -->
+      
+      <mat-form-field appearance="fill">
+        <mat-label >Select</mat-label>      
+        <mat-select (selectionChange)="onFormSelection($event)" [(ngModel)]="accountDropDown">
+          <mat-option *ngFor="let account of accounts" [value]="account.value">
+            {{account.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  
+  <div class="row justify-content-center primaryTextColor" >
+    <p *ngIf="error" class="error">
+      {{ error }}
+    </p>
+    
+    <!-- Spriner code start-->
+    <!-- <div *ngIf="showLoader" class="loader"></div>   -->
+    <!-- <div *ngIf="showLoader" ><h4>Loading.....</h4></div> -->
+    <!-- <div *ngIf="showLoader" ><h4>Please wait! your request is submitting.....</h4></div> -->
+    
+    <div class="container" *ngIf="showLoader">    
+      <div class="row">
+        <div id="loader">
+            <div class="dot"></div>
+            <h4>Please Wait...</h4>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="loading"></div>
+        </div>
+      </div>
+    </div>
+  <!-- Spriner code start-->
+  
+    
+  </div>
+  
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <form *ngIf="currentActiveForm === 'database'" #databaseForm="ngForm"
+            (ngSubmit)="onSubmitDatabaseForm(databaseForm)">
+            
+            <div class="form-group">
+              <label for="email">*Urgency</label>
+              <input type="text"
+                     class="form-control"
+                     id="urgency"
+                     disabled
+                     aria-describedby="emailHelp"
+                     name="urgency"
+                     [(ngModel)]="defaultVal.urgency">                   
+            </div>
+            <div class="form-group">
+              <label for="email">*Data center</label>
+              <input type="text"
+                     class="form-control"
+                     id="dataCenter"
+                     disabled
+                     aria-describedby="emailHelp"
+                     name="dataCenter"
+                     [(ngModel)]="defaultVal.dataCenter">                   
+            </div>
+  
+  
+        <div class="form-group">
+          <label for="databaseAccountName">*Database Account Name</label>
+          <input type="text"
+                 class="form-control" 
+                 id="databaseAccountName"
+                 aria-describedby="emailHelp"
+                 required
+                 ngModel
+                 #databaseAccountName="ngModel"
+                 name="databaseAccountName"
+                 placeholder="Enter database account name">
+          <small [hidden]="!(databaseAccountName.control.touched && databaseAccountName.control.invalid)" class="form-text text-danger">Database Account Name Cannot be Empty.</small>
+        </div>
+        <!-- <div class="form-group">
+          <label for="backendEnv">*Back End Environment</label>
+          <mat-form-field appearance="fill" id="backendEnv">
+            <mat-label>Select</mat-label>
+            <mat-select ngModel required
+                        name="environment">
+              <mat-option *ngFor="let environment of dbEnvironments" [value]="environment.value">
+                {{environment.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div> -->
+  
+        <label for="backendEnv">*Back End Environment</label>
+        <div class="form-group col-xs-3">     
+          <select class="form-control" ngModel required name="environment" >
+                    <option value="" disabled>--Select--</option>
+                    <option *ngFor="let environment of dbEnvironments" [value]="environment.value">
+                      {{environment.viewValue}}
+                    </option>
+          </select>
+        </div>
+  
+        <div class="form-group">
+          <label for="email">*Email address</label>
+          <input type="email"
+                 class="form-control"
+                 id="email"
+                 aria-describedby="emailHelp"
+                 required
+                 ngModel
+                 #email="ngModel"
+                 name="email"
+                 placeholder="Enter email">
+                 <small [hidden]="!(email.control.touched && email.control.invalid)" class="form-text text-danger">Email address can not be empty.</small>
+        </div>
+  
+        <button [disabled]="databaseForm.invalid" type="submit" class="btn btn-primary">Submit</button>
+  
+      </form>
+    </div>
+  </div>
+  
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      
+      <form *ngIf="currentActiveForm === 'application'" #applicationForm="ngForm"
+            (ngSubmit)="onSubmitApplicationForm(applicationForm)">
+  
+            <div class="form-group">
+              
+              <label for="email">*Urgency</label>
+              <input type="text"
+                     class="form-control"
+                     id="urgency"
+                     disabled
+                     aria-describedby="emailHelp"
+                     name="urgency"
+                     [(ngModel)]="defaultVal.urgency">                   
+            </div>
+  
+            <div class="form-group">
+              <label for="email">*Data center</label>
+              <input type="text"
+                     class="form-control"
+                     id="dataCenter"
+                     disabled
+                     aria-describedby="emailHelp"
+                     name="dataCenter"
+                     [(ngModel)]="defaultVal.dataCenter">                   
+            </div>
+  
+        <div class="form-group">
+          <label for="applicationAccountName">*Application Account Name</label>
+          <input type="text"
+                 class="form-control"
+                 id="applicationAccountName"
+                 aria-describedby="emailHelp"
+                 required
+                 ngModel
+                 #applicationAccountName="ngModel"
+                 name="applicationAccountName"
+                 placeholder="Enter application account name">
+          <small [hidden]="!(applicationAccountName.control.touched && applicationAccountName.control.invalid)" class="form-text text-danger">Application Account Name Can not be Empty.</small>
+        </div>
+  
+  
+        <label for="backendEnv">*Back End Environment</label>
+        <div class="form-group col-xs-3">     
+          <select class="form-control" ngModel required name="environment" >
+                    <option value="" disabled>--Select--</option>
+                    <option *ngFor="let environment of appEnvironments" [value]="environment.value">
+                      {{environment.viewValue}}
+                    </option>
+          </select>
+        </div>
+  
+        <!-- <div class="form-group">
+          <label for="backendEnv">*Application Environment</label>
+          <mat-form-field appearance="fill" id="backendEnv">
+            <mat-label>Select</mat-label>
+            <mat-select ngModel required
+                        name="environment">
+              <mat-option *ngFor="let environment of appEnvironments" [value]="environment.value">
+                {{environment.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div> -->
+        <div class="form-group">
+          <label for="email">*User Email address</label>
+          <input type="email"
+                 class="form-control"
+                 id="email"
+                 aria-describedby="emailHelp"
+                 required
+                 ngModel
+                 #email="ngModel"
+                 name="email"
+                 placeholder="Enter email">
+                 <small [hidden]="!(email.control.touched && email.control.invalid)" class="form-text text-danger">Email address can not be empty.</small>
+        </div>
+  
+        <button [disabled]="applicationForm.invalid" type="submit" class="btn btn-primary">Submit</button>
+  
+      </form>
+    </div>
+  </div>
+  
+  <div class="row justify-content-center">
+    <div class="col-md-4">   
+      <form *ngIf="currentActiveForm === 'domain'" #domainForm="ngForm"
+            (ngSubmit)="onSubmitDomainForm(domainForm)">
+  
+            <div class="form-group">
+              <label for="email">*Urgency</label>
+              <input type="text"
+                     class="form-control"
+                     id="urgency"
+                     disabled
+                     aria-describedby="emailHelp"
+                     name="urgency"
+                     [(ngModel)]="defaultVal.urgency">                   
+            </div>
+  
+            <div class="form-group">
+              <label for="email">*Data center</label>
+              <input type="text"
+                     class="form-control"
+                     id="dataCenter"
+                     disabled
+                     aria-describedby="emailHelp"
+                     name="dataCenter"
+                     [(ngModel)]="defaultVal.dataCenter">                   
+            </div>
+  
+  
+        <div class="form-group">
+          <label for="domainAccountName">*Domain Account Name</label>
+          <input type="text"
+                 class="form-control"
+                 id="domainFormAccountName"
+                 aria-describedby="emailHelp"
+                 required
+                 ngModel
+                 #domainFormAccountName="ngModel"
+                 name="domainFormAccountName"
+                 placeholder="Enter domain account name">
+          <small [hidden]="!(domainFormAccountName.control.touched && domainFormAccountName.control.invalid)" class="form-text text-danger">Domain Account Name Can not be Empty.</small>
+        </div>      
+        <div class="form-group">
+          <label for="emailInputEl">*User Email address</label>
+          <input type="email"
+                 class="form-control"
+                 id="emailInputEl"
+                 aria-describedby="emailHelp"
+                 required
+                 ngModel
+                 #email="ngModel"
+                 name="email"
+                 placeholder="Enter email">
+                 <small [hidden]="!(email.control.touched && email.control.invalid)" class="form-text text-danger">Email address can not be empty.</small>
+        </div>
+        <button [disabled]="domainForm.invalid" type="submit" class="btn btn-primary">Submit</button>
+  
+      </form>
+    </div>
+  </div>
+  
